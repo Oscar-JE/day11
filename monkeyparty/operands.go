@@ -20,17 +20,17 @@ func (m Multiply) Opr(worry int) int {
 	return m.k * worry
 }
 
-func fistDevideSecond(denominator int, numerator int) bool {
-	if denominator == 0 || denominator > numerator {
+type Square struct {
+}
+
+func (s Square) Opr(worry int) int {
+	return worry * worry
+}
+
+func firstDevideSecond(denominator int, numerator int) bool {
+	if denominator == 0 {
 		return false
 	}
-	if denominator == 1 {
-		return true
-	}
-	var fraction int = numerator / denominator
-	if fraction == 1 {
-		return true
-	} else {
-		return fistDevideSecond(denominator, fraction)
-	}
+	modulus := numerator % denominator
+	return modulus == 0
 }

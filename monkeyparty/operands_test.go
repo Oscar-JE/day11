@@ -21,15 +21,29 @@ func TestOperations(t *testing.T) {
 	}
 }
 
-func TestDivisibility(t *testing.T) {
+func TestDivisibilityMany(t *testing.T) {
 	denominators := []int{0, 1, 2, 3, 4, 5, 6, 7}
 	enumerators := []int{2, 2, 1, 6, 7, 8, 12, 50}
 	expected := []bool{false, true, false, true, false, false, true, false}
 	for index, _ := range expected {
-		res := fistDevideSecond(denominators[index], enumerators[index])
+		res := firstDevideSecond(denominators[index], enumerators[index])
 		exp := expected[index]
 		assertion(exp, res, index, t)
 	}
+}
+
+func TestOneDivisibility(t *testing.T) {
+	denominator := 0
+	enumerator := 1
+	res := firstDevideSecond(denominator, enumerator)
+	assertion(false, res, 51, t)
+}
+
+func TestDivisibilityCase2(t *testing.T) {
+	denominator := 1
+	enumerator := 2
+	res := firstDevideSecond(denominator, enumerator)
+	assertion(true, res, 51, t)
 }
 
 func assertion(expect bool, res bool, index int, t *testing.T) {
