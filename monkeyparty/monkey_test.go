@@ -21,15 +21,16 @@ func TestShortExample(t *testing.T) {
 	monkeys[3].SetPositiveReceiver(&monkeys[0])
 	monkeys[3].SetNegativeReceiver(&monkeys[1])
 
-	for _, m := range monkeys {
-		fmt.Println(m)
+	for i := range monkeys {
+		fmt.Println(monkeys[i])
 	}
-	for _, m := range monkeys {
-		m.Monkeybusiness()
-		m.items = []int{}
+	for index := range monkeys {
+		fmt.Printf("index : %d \n", index)
+		//m := monkeys[index]
+		monkeys[index].Monkeybusiness()
 	}
 
-	for _, m := range monkeys {
-		fmt.Println(m)
+	for i := range monkeys {
+		fmt.Println(monkeys[i])
 	}
 }

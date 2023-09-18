@@ -43,8 +43,7 @@ func (m *Monkey) Monkeybusiness() { // frågan är om man ska stadga någonting 
 	nrItem := len(m.items)
 	i := 0
 	for i < nrItem {
-		activeItem := m.items[0]
-		m.items = m.items[1:] // varför fungerar inte denna ??
+		activeItem := m.items[i]
 		activeItem = m.oper.Opr(activeItem) / 3
 		m.nrOfInspects++
 		if firstDevideSecond(m.divider, activeItem) {
@@ -54,6 +53,7 @@ func (m *Monkey) Monkeybusiness() { // frågan är om man ska stadga någonting 
 		}
 		i++
 	}
+	m.items = []int{0}
 }
 
 func (m Monkey) String() string {

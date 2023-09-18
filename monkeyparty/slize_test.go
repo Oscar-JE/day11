@@ -39,10 +39,10 @@ func (w *Wraper) cropInStruct() {
 func TestModifySlizeInStructPassedToFunction(t *testing.T) {
 	w := Wraper{[]int{1, 2, 3}}
 	w.setToEleven()
-	w.cropInStruct()
 	if (w.S)[0] != 11 {
 		t.Errorf("first element not changed")
 	}
+	w.cropInStruct()
 	if len(w.S) != 2 {
 		t.Errorf("internal slize not cropped")
 	}
@@ -63,11 +63,23 @@ func (w *RefWraper) cropInStruct() {
 func TestModifyWithSlizeRefInStructPassedToFunction(t *testing.T) {
 	w := RefWraper{&[]int{1, 2, 3}}
 	w.setToEleven()
-	w.cropInStruct()
 	if (*w.S)[0] != 11 {
 		t.Errorf("first element not changed")
 	}
+	w.cropInStruct()
 	if len(*w.S) != 2 {
 		t.Errorf("internal slize not cropped")
+	}
+}
+
+func TestModifyInLoop(t *testing.T) {
+	list := []Wraper{Wraper{[]int{1, 2, 3}}, Wraper{[]int{4, 5, 6}}}
+	for index, _ := range list {
+		list[index].cropInStruct()
+	}
+	for _, element := range list {
+		if len(element.S) != 2 {
+			t.Errorf("not all lengts in structs are 2")
+		}
 	}
 }
