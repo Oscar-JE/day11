@@ -5,19 +5,19 @@ type Operation interface {
 }
 
 type Add struct {
-	k int
+	K int
 }
 
 func (a Add) Opr(worry int) int {
-	return a.k + worry
+	return a.K + worry
 }
 
 type Multiply struct {
-	k int
+	K int
 }
 
 func (m Multiply) Opr(worry int) int {
-	return m.k * worry
+	return m.K * worry
 }
 
 type Square struct {

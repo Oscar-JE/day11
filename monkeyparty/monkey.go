@@ -53,7 +53,7 @@ func (m *Monkey) Monkeybusiness() { // frågan är om man ska stadga någonting 
 		}
 		i++
 	}
-	m.items = []int{0}
+	m.items = []int{}
 }
 
 func (m Monkey) String() string {
