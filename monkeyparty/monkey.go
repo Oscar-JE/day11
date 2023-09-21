@@ -1,17 +1,20 @@
 package monkeyparty
 
-import "fmt"
+import (
+	"day11/operations"
+	"fmt"
+)
 
 type Monkey struct {
 	items            []int
-	oper             Operation
+	oper             operations.Operation
 	divider          int
 	positivReceiver  *Monkey
 	negativeReceiver *Monkey
 	nrOfInspects     int
 }
 
-func InitMonkey(items []int, opr Operation, devider int) Monkey {
+func InitMonkey(items []int, opr operations.Operation, devider int) Monkey {
 	return Monkey{items: items, oper: opr,
 		divider: devider, positivReceiver: nil, negativeReceiver: nil, nrOfInspects: 0}
 }
@@ -31,7 +34,7 @@ func (m *Monkey) inspectItem() {
 }
 
 func (m Monkey) preformeTest(item int) bool {
-	return firstDevideSecond(m.divider, item)
+	return operations.FirstDevideSecond(m.divider, item)
 }
 
 func sendTo(other *Monkey, item int) {
@@ -39,14 +42,31 @@ func sendTo(other *Monkey, item int) {
 
 }
 
-func (m *Monkey) Monkeybusiness() { // frågan är om man ska stadga någonting för att inte appor ska kasta flera saker per lop ?
+func (m *Monkey) Shenanigans() { // frågan är om man ska stadga någonting för att inte appor ska kasta flera saker per lop ?
 	nrItem := len(m.items)
 	i := 0
 	for i < nrItem {
 		activeItem := m.items[i]
 		activeItem = m.oper.Opr(activeItem) / 3
 		m.nrOfInspects++
-		if firstDevideSecond(m.divider, activeItem) {
+		if operations.FirstDevideSecond(m.divider, activeItem) {
+			sendTo(m.positivReceiver, activeItem)
+		} else {
+			sendTo(m.negativeReceiver, activeItem)
+		}
+		i++
+	}
+	m.items = []int{}
+}
+
+func (m *Monkey) Shenanigans2() { // frågan är om man ska stadga någonting för att inte appor ska kasta flera saker per lop ?
+	nrItem := len(m.items)
+	i := 0
+	for i < nrItem {
+		activeItem := m.items[i]
+		activeItem = m.oper.Opr(activeItem)
+		m.nrOfInspects++
+		if operations.FirstDevideSecond(m.divider, activeItem) {
 			sendTo(m.positivReceiver, activeItem)
 		} else {
 			sendTo(m.negativeReceiver, activeItem)
