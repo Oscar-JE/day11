@@ -35,7 +35,10 @@ func main() {
 func party(party *[]monkeyparty.Monkey) {
 	for index := range *party {
 		fmt.Printf("index : %d \n", index)
-		//m := monkeys[index]
 		(*party)[index].Monkeybusiness()
 	}
+}
+
+func printParty(party *[]monkeyparty.Monkey){
+	
 }
