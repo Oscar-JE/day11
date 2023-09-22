@@ -59,12 +59,12 @@ func (m *Monkey) Shenanigans() { // frågan är om man ska stadga någonting fö
 	m.items = []int{}
 }
 
-func (m *Monkey) Shenanigans2() { // frågan är om man ska stadga någonting för att inte appor ska kasta flera saker per lop ?
+func (m *Monkey) Shenanigans2(normalizer int) { // frågan är om man ska stadga någonting för att inte appor ska kasta flera saker per lop ?
 	nrItem := len(m.items)
 	i := 0
 	for i < nrItem {
 		activeItem := m.items[i]
-		activeItem = m.oper.Opr(activeItem)
+		activeItem = m.oper.Opr(activeItem) % normalizer
 		m.nrOfInspects++
 		if operations.FirstDevideSecond(m.divider, activeItem) {
 			sendTo(m.positivReceiver, activeItem)

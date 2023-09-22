@@ -9,18 +9,33 @@ import (
 
 func main() {
 
-	monkeyParty := createFromExample()
-	//monkeyParty := createFromFile("input.txt")
+	//monkeyParty := createFromExample()
+	monkeyParty := createFromFile("input.txt")
 
 	fmt.Println(monkeyParty)
+	monkeyParty.Party2()
+	print("after one round\n")
+	fmt.Println(monkeyParty.GetInspecteds())
 
-	for i := 0; i < 10000; i++ {
+	for i := 1; i < 20; i++ {
 		monkeyParty.Party2()
 	}
 
-	fmt.Println(monkeyParty)
+	print("after 20 round\n")
+	print("inspected numbers\n")
 	fmt.Println(monkeyParty.GetInspecteds())
+
+	for i := 20; i < 10000; i++ {
+		monkeyParty.Party2()
+	}
+
+	print("after 10000 round\n")
+	fmt.Println(monkeyParty)
+	print("inspected numbers\n")
+	fmt.Println(monkeyParty.GetInspecteds())
+	print("Monkeybuissines\n")
 	fmt.Println(monkeyParty.MonkeyBusiness())
+
 }
 
 func createFromExample() monkeyparty.MonkeyParty {

@@ -7,20 +7,23 @@ import (
 )
 
 type MonkeyParty struct {
-	monkeys []Monkey
+	monkeys    []Monkey
+	normalizer int
 }
 
 func Init(infos []parse.InputInfo) MonkeyParty {
 	monkeys := []Monkey{}
+	n := 1
 	for _, info := range infos {
 		m := InitMonkey(info.Items, info.Operation, info.Devider)
+		n = n * info.Devider
 		monkeys = append(monkeys, m)
 	}
 	for index, info := range infos {
 		monkeys[index].SetPositiveReceiver(&monkeys[info.PositiveReciverIndex])
 		monkeys[index].SetNegativeReceiver(&monkeys[info.NegativeReciverindex])
 	}
-	return MonkeyParty{monkeys: monkeys}
+	return MonkeyParty{monkeys: monkeys, normalizer: n}
 }
 
 func (m *MonkeyParty) Party() {
@@ -29,9 +32,9 @@ func (m *MonkeyParty) Party() {
 	}
 }
 
-func (m *MonkeyParty) Party2(){
+func (m *MonkeyParty) Party2() {
 	for index := range m.monkeys {
-		m.monkeys[index].Shenanigans2()
+		m.monkeys[index].Shenanigans2(m.normalizer)
 	}
 }
 
